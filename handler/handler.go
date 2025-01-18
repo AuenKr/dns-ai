@@ -3,14 +3,23 @@ package handler
 import (
 	llm "dns-server/utils"
 	"fmt"
+	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/miekg/dns"
 )
 
+var count uint64 = 0
+var mutex *sync.Mutex = &sync.Mutex{}
+
 type DNSHandler struct{}
 
 func (h *DNSHandler) ServeDNS(w dns.ResponseWriter, r *dns.Msg) {
+	mutex.Lock()
+	count++
+	mutex.Unlock()
+
 	msg := new(dns.Msg)
 	msg.SetReply(r)
 
@@ -26,6 +35,16 @@ func (h *DNSHandler) ServeDNS(w dns.ResponseWriter, r *dns.Msg) {
 			})
 			w.WriteMsg(msg)
 			return
+		}
+
+		if q.Name == "stats." {
+			msg.Answer = append(msg.Answer, &dns.TXT{
+				Hdr: dns.RR_Header{Name: q.Name, Rrtype: dns.TypeTXT, Class: dns.ClassINET, Ttl: 0},
+				Txt: []string{
+					"no req " + strconv.Itoa(int(count)),
+				},
+			})
+			w.WriteMsg(msg)
 		}
 
 		var allQuestion []string
@@ -55,11 +74,12 @@ func (h *DNSHandler) ServeDNS(w dns.ResponseWriter, r *dns.Msg) {
 		}
 
 		msg.Answer = append(msg.Answer, &dns.TXT{
-			Hdr: dns.RR_Header{Name: q.Name, Rrtype: dns.TypeTXT, Class: dns.ClassINET, Ttl: 60},
+			Hdr: dns.RR_Header{Name: q.Name, Rrtype: dns.TypeTXT, Class: dns.ClassINET, Ttl: 5 * 60},
 			Txt: []string{
 				result,
 			},
 		})
+
 		w.WriteMsg(msg)
 	}
 }
