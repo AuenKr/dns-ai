@@ -3,7 +3,6 @@ package main
 import (
 	"dns-server/handler"
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -12,7 +11,7 @@ import (
 
 func main() {
 	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error while loading env")
+		fmt.Println("env file not found, using os env variable")
 	}
 
 	PORT, ok := os.LookupEnv("PORT")

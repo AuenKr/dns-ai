@@ -1,0 +1,5 @@
+todo.todo
+.env
+query/**
+dns-server
+main
