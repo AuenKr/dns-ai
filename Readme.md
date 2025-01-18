@@ -1,18 +1,50 @@
-DNS Query
+# DNS Query
 
-Goal: Create DNS Server with ai capability
+### Goal: Create DNS Server with ai capability
 
 example: 
 
-dns Query: `dig @localhost -p 3000 +short TXT what.is.dns` // Any question
+DNS Query: 
 
-output: `The Domain Name System translates domain names to IP addresses.`
+`dig @localhost -p 3000 +short TXT what.is.dns` // Any question
 
-Inspire from:
-Github: `https://github.com/knadh/dns.toys`
+Output: 
 
-My Goal: Instead of manually calculating particular query, add LLM is bw to answer that query.
+`The Domain Name System translates domain names to IP addresses.`
+
+DNS Query:
+
+`dig @localhost -p 3000 +short TXT what.is.100.times.30`
+
+Output:
+
+`"3000"`
+
+> Inspire from:
+
+Github: `https://github.com/knadh/dns.toys` 
+
+It only support limit no of query.
+
+
+#### My Goal: Instead of manually calculating particular query, use LLM to answer that query.
 
 Pros: Can answer almost any query.
 
 Cons: It will be very slow.
+
+## How to run locally
+
+> Using docker
+
+1. update env variable to `docker-compose.yaml` file
+
+2. `docker compose up`
+
+> Without docker
+
+1. rename sample.env to .env
+
+2. `go mod tidy` and `go install`
+
+3. `go run main.go`
