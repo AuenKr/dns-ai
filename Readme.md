@@ -20,11 +20,14 @@ Output:
 
 `"3000"`
 
+![example](./public/image.png)
+
 > Inspire from:
 
 Github: `https://github.com/knadh/dns.toys` 
 
 It only support limit no of query.
+
 
 
 #### My Goal: Instead of manually calculating particular query, use LLM to answer that query.

@@ -32,7 +32,7 @@ func GenerateContent(query string) (string, error) {
 	model.SetMaxOutputTokens(8192)
 	model.ResponseMIMEType = "text/plain"
 	model.SystemInstruction = &genai.Content{
-		Parts: []genai.Part{genai.Text("You are DNS Assistant. Respond to DNS TXT queries with concise answers, ensuring responses do not exceed 255 characters. For math queries, provide only the result without additional details or context.")},
+		Parts: []genai.Part{genai.Text("You are AI Assistant. Respond to DNS TXT queries with concise answers, ensuring responses do not exceed 255 characters. For math queries, provide only the result without additional details or context.For any other thing use your llm generation")},
 	}
 
 	resp, err := model.GenerateContent(ctx, genai.Text(query))
