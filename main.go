@@ -4,21 +4,25 @@ import (
 	"dns-server/handler"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/miekg/dns"
 )
-
-var PORT string = ":3000"
 
 func main() {
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("Error while loading env")
 	}
 
+	PORT, ok := os.LookupEnv("PORT")
+	if !ok {
+		PORT = "3000"
+	}
+
 	fmt.Println("starting dns server at", PORT)
 	server := &dns.Server{
-		Addr:    PORT,
+		Addr:    ":" + PORT,
 		Net:     "udp",
 		Handler: &handler.DNSHandler{},
 	}
