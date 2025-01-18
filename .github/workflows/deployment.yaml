@@ -1,0 +1,24 @@
+name: Rebuild and Deploy to EC2 Server
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rebuild and Deploy the DNS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/dns-ai
+            git pull
+
+            # Only Building
+            docker compose -f docker-compose-prod.yaml build
+            # Restarting process
+            docker compose -f docker-compose-prod.yaml up -d
