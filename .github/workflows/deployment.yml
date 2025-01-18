@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy the frontend and backend
+      - name: Deploy the DNS
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
@@ -20,4 +20,8 @@ jobs:
             cd /home/ubuntu/dns-ai
             git pull
 
-            docker compose -f docker-compose-prod.yaml up --build
+            # Only Building
+            docker compose -f docker-compose-prod.yaml build
+
+            # Restart container
+            docker compose -f docker-compose-prod.yaml up -d
