@@ -6,19 +6,21 @@
 
 DNS Query:
 
-`dig @dns.auenkr.me -p 9005 +short TXT write.query.with.periods`
+`dig @dns.auenkr.com -p 9005 +short TXT "write query with periods"`
+
+Limit: 255 Characters
 
 Output:
 
 `No query provided.`
 
-example: 
+Example:
 
-DNS Query: 
+DNS Query:
 
 `dig @localhost -p 3000 +short TXT what.is.dns` // Any question
 
-Output: 
+Output:
 
 `The Domain Name System translates domain names to IP addresses.`
 
@@ -34,11 +36,11 @@ Output:
 
 > Inspire from:
 
-Github: `https://github.com/knadh/dns.toys` 
+Github: `https://github.com/knadh/dns.toys`
 
 It only support limit no of query.
 
-### My Goal: Instead of manually calculating particular query, use LLM to answer that query.
+### My Goal: Instead of manually calculating particular query, use LLM to answer that query
 
 Pros: Can answer almost any query.
 

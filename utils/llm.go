@@ -24,7 +24,8 @@ func GenerateContent(query string) (string, error) {
 	}
 	defer client.Close()
 
-	model := client.GenerativeModel("gemini-1.5-flash-8b")
+	modelName := os.Getenv("MODEL_NAME")
+	model := client.GenerativeModel(modelName)
 
 	model.SetTemperature(1)
 	model.SetTopK(40)

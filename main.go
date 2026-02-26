@@ -1,9 +1,10 @@
 package main
 
 import (
-	"dns-server/handler"
 	"fmt"
 	"os"
+
+	"dns-server/handler"
 
 	"github.com/joho/godotenv"
 	"github.com/miekg/dns"

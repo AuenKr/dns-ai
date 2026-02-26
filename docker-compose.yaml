@@ -6,4 +6,5 @@ services:
       - 3000:3000/udp
     environment:
       - PORT=3000
-      - GEMINI_API_KEY="YOUR GEMINI API KEY"
+      - MODEL_NAME=gemini-flash-lite-latest
+      - GEMINI_API_KEY=YOUR_API_KEY
